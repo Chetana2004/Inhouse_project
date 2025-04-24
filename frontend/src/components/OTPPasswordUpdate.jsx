@@ -18,7 +18,7 @@ const OTPPasswordUpdate = () => {
     e.preventDefault();
     setIsLoading(true);
     try {
-      await axios.post("http://localhost:5000/auth/send-password-otp", { email });
+      await axios.post("https://inhouse-project.onrender.com/auth/send-password-otp", { email });
       setMessage("OTP sent to your email");
       setStep(2);
     } catch (error) {
@@ -32,7 +32,7 @@ const OTPPasswordUpdate = () => {
     e.preventDefault();
     setIsLoading(true);
     try {
-      await axios.post("http://localhost:5000/auth/verify-password-otp", { email, otp });
+      await axios.post("https://inhouse-project.onrender.com/auth/verify-password-otp", { email, otp });
       setMessage("OTP verified successfully");
       setStep(3);
     } catch (error) {
@@ -50,7 +50,7 @@ const OTPPasswordUpdate = () => {
     }
     setIsLoading(true);
     try {
-      await axios.post("http://localhost:5000/auth/update-password-with-otp", {
+      await axios.post("https://inhouse-project.onrender.com/auth/update-password-with-otp", {
         email,
         otp,
         newPassword

@@ -23,7 +23,7 @@
 //     }
 
 //     try {
-//       const response = await axios.post("http://localhost:5000/auth/register", {
+//       const response = await axios.post("https://inhouse-project.onrender.com/auth/register", {
 //         name,
 //         email,
 //         password, // or just `password` depending on your backend
@@ -179,7 +179,7 @@ const RegistrationForm = () => {
     }
 
     try {
-      const response = await axios.post("http://localhost:5000/auth/register", {
+      const response = await axios.post("https://inhouse-project.onrender.com/auth/register", {
         name,
         email,
         password,

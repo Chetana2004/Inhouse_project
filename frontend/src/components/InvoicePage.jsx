@@ -655,7 +655,7 @@
 //     };
 
 //     try {
-//       await axios.post("http://localhost:5000/invoice/create", invoiceDataToSend);
+//       await axios.post("https://inhouse-project.onrender.com/invoice/create", invoiceDataToSend);
 //       alert("Invoice saved successfully!");
 //       navigate("/invoices");  // Redirect to invoices page or wherever needed
 //     } catch (error) {
@@ -1187,7 +1187,7 @@ const InvoicePage = () => {
     };
 
     try {
-      await axios.post("http://localhost:5000/invoice/create", invoiceDataToSend);
+      await axios.post("https://inhouse-project.onrender.com/invoice/create", invoiceDataToSend);
       alert("Invoice saved successfully!");
       navigate("/invoices");
     } catch (error) {

@@ -456,7 +456,7 @@ const GenerateQuotation = ({ onGenerate }) => {
     };
 
     try {
-      const response = await axios.post("http://localhost:5000/quotation/create", quotation);
+      const response = await axios.post("https://inhouse-project.onrender.com/quotation/create", quotation);
 
       if (response.status === 200) {
         console.log("Quotation created:", response.data);
