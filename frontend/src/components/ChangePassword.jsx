@@ -19,7 +19,7 @@ const ChangePassword = () => {
     const verifyToken = async () => {
       try {
         const response = await axios.get(
-          `https://inhouse-project.onrender.com/auth/verify-reset-token/${token}`
+          `https://inhouse-project-3.onrender.com/auth/verify-reset-token/${token}`
         );
         setEmail(response.data.email);
         setIsValidToken(true);
@@ -44,7 +44,7 @@ const ChangePassword = () => {
     setMessage("");
 
     try {
-      await axios.post("https://inhouse-project.onrender.com/auth/reset-password", {
+      await axios.post("https://inhouse-project-3.onrender.com/auth/reset-password", {
         token,
         newPassword: password
       });

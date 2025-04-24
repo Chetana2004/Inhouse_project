@@ -11,7 +11,7 @@
 //   const handleLogin = async (e) => {
 //     e.preventDefault();
 //     try {
-//       const response = await axios.post("https://inhouse-project.onrender.com/auth/login", {
+//       const response = await axios.post("https://inhouse-project-3.onrender.com/auth/login", {
 //         email,
 //         password,
 //       });
@@ -124,7 +124,7 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("https://inhouse-project.onrender.com/auth/login", {
+      const response = await axios.post("https://inhouse-project-3.onrender.com/auth/login", {
         email,
         password,
       });

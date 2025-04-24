@@ -110,7 +110,7 @@ const OrdersInvoice = () => {
 
   useEffect(() => {
     axios
-      .get("https://inhouse-project.onrender.com/order/get")
+      .get("https://inhouse-project-3.onrender.com/order/get")
       .then((res) => {
         setOrders(res.data);
         setLoading(false);

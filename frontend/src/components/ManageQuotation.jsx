@@ -151,7 +151,7 @@ const ManageQuotation = () => {
 
   const fetchQuotations = async () => {
     try {
-      const res = await axios.get("https://inhouse-project.onrender.com/quotation/get");
+      const res = await axios.get("https://inhouse-project-3.onrender.com/quotation/get");
       setQuotations(res.data);
     } catch (err) {
       console.error("Failed to fetch quotations", err);
@@ -164,7 +164,7 @@ const ManageQuotation = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`https://inhouse-project.onrender.com/api/quotations/${id}`);
+      await axios.delete(`https://inhouse-project-3.onrender.com/api/quotations/${id}`);
       setQuotations((prev) => prev.filter((q) => q._id !== id));
     } catch (err) {
       console.error("Failed to delete quotation", err);

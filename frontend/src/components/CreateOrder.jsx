@@ -411,7 +411,7 @@ const CreateOrder = ({ onSave }) => {
 
     try {
       // Sending POST request to the backend to save the order
-      const response = await axios.post("https://inhouse-project.onrender.com/order/create", newOrder);
+      const response = await axios.post("https://inhouse-project-3.onrender.com/order/create", newOrder);
 
       if (response.status === 201) {
         alert("Order created successfully!");

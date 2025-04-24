@@ -121,7 +121,7 @@
 //   const handleSaveOrder = async (newOrder) => {
 //     try {
 //       // POST to backend
-//       const response = await axios.post("https://inhouse-project.onrender.com/order/create", newOrder);
+//       const response = await axios.post("https://inhouse-project-3.onrender.com/order/create", newOrder);
   
 //       // Save the order returned from the backend
 //       const savedOrder = response.data;
