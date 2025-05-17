@@ -132,11 +132,13 @@
   font-size: 12px;
   font-weight: 500;
   text-transform: capitalize;
+  
 }
 
 .badge-draft {
-  background-color: #f0f0f0;
+  /* background-color: #f0f0f0; */
   color: #555;
+  background-color: #0f5132;
 }
 
 .badge-sent {
