@@ -1,27 +1,22 @@
-// const express = require("express");
-// const { createOrder, getOrders } = require("../../controller/SalesDepartment/order.controller");
-// const router = express.Router();
-
-// router.post("/create", createOrder);
-// router.get("/get", getOrders);
-// // router.get("/:id", getQuotationById);
-// // router.put("/:id", updateQuotation);
-// // router.delete("/:id", deleteQuotation);
-
-// module.exports = router;
-
-
-
-
-// Snehals Backend Code
-const express = require("express");
+const express = require('express');
 const router = express.Router();
-const orderController = require("../../controllers/SalesDepartment/order.controller");
+const orderController = require('../../controllers/SalesDepartment/order.controller');
 
-router.post("/create", orderController.createOrder);
-router.get("/get", orderController.getAllOrders);
-router.get("/:orderNumber", orderController.getOrderByOrderNumber); // Fixed name
-router.put("/:orderNumber/status", orderController.updateOrderStatus); // Included the optional status update
-router.get("/", orderController.getAllOrders);
+// Verify controller functions are available
+console.log('Controller functions:', {
+  createOrder: typeof orderController.createOrder,
+  getAllOrders: typeof orderController.getAllOrders,
+  getOrderByOrderNumber: typeof orderController.getOrderByOrderNumber
+});
+
+// Order routes
+router.post('/create', orderController.createOrder);
+router.get('/get', orderController.getAllOrders);
+router.get('/get/:orderNumber', orderController.getOrderByOrderNumber);
+
+// Test endpoint
+router.get('/test', (req, res) => {
+  res.status(200).json({ message: "Orders API is working!" });
+});
 
 module.exports = router;
