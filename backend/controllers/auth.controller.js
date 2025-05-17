@@ -205,13 +205,13 @@ exports.sendPasswordOtp = async (req, res) => {
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-      user: process.env.EMAIL,
+      user: process.env.EMAIL_USER,
       pass: process.env.EMAIL_PASS,
     },
   });
 
   const mailOptions = {
-    from: process.env.EMAIL,
+    from: process.env.EMAIL_USER,
     to: email,
     subject: "Password Reset OTP",
     text: `Your OTP is: ${otp}`,
@@ -239,22 +239,29 @@ exports.verifyPasswordOtp = (req, res) => {
 
 // Update password using OTP
 exports.updatePasswordWithOtp = async (req, res) => {
-  const { email, otp, newPassword } = req.body;
+  const { email, newPassword } = req.body;
 
-  if (otpStore.get(email) !== otp) {
-    return res.status(400).json({ message: "Invalid or expired OTP" });
+  if (!email || !newPassword) {
+    return res.status(400).json({ message: "Email and new password are required" });
   }
 
   try {
-    const userDoc = await User.findOne({ email });
-    if (!userDoc) return res.status(404).json({ message: "User not found" });
+    const user = await User.findOne({ email });
 
-    userDoc.passwordHash = await bcrypt.hash(newPassword, 10);
-    await userDoc.save();
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
 
+    // Hash the new password
+    user.passwordHash = await bcrypt.hash(newPassword, 10);
+    await user.save();
+
+    // Optionally clean up verified OTP (if still stored)
     otpStore.delete(email);
+
     res.status(200).json({ message: "Password updated successfully" });
   } catch (err) {
+    console.error("Error updating password:", err);
     res.status(500).json({ message: "Server error", error: err.message });
   }
 };

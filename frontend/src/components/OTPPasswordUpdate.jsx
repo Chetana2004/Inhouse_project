@@ -18,7 +18,7 @@ const OTPPasswordUpdate = () => {
     e.preventDefault();
     setIsLoading(true);
     try {
-      await axios.post("https://inhouse-project-3.onrender.com/auth/send-password-otp", { email });
+      await axios.post("http://localhost:5000/auth/send-password-otp", { email });
       setMessage("OTP sent to your email");
       setStep(2);
     } catch (error) {
@@ -32,7 +32,7 @@ const OTPPasswordUpdate = () => {
     e.preventDefault();
     setIsLoading(true);
     try {
-      await axios.post("https://inhouse-project-3.onrender.com/auth/verify-password-otp", { email, otp });
+      await axios.post("http://localhost:5000/auth/verify-password-otp", { email, otp });
       setMessage("OTP verified successfully");
       setStep(3);
     } catch (error) {
@@ -50,9 +50,8 @@ const OTPPasswordUpdate = () => {
     }
     setIsLoading(true);
     try {
-      await axios.post("https://inhouse-project-3.onrender.com/auth/update-password-with-otp", {
+      await axios.post("http://localhost:5000/auth/update-password-with-otp", {
         email,
-        otp,
         newPassword
       });
       setMessage("Password updated successfully! Redirecting to login...");
@@ -108,27 +107,54 @@ const OTPPasswordUpdate = () => {
           )}
 
           {step === 2 && (
-            <div className="input-group">
-              <label>OTP</label>
-              <input
-                type="text"
-                placeholder="Enter 6-digit OTP"
-                value={otp}
-                onChange={(e) => setOtp(e.target.value)}
-                required
-                maxLength="6"
-              />
-              <p className="otp-resend">
-                Didn't receive OTP? <button 
-                  type="button" 
-                  onClick={handleSendOTP}
-                  className="resend-link"
-                >
-                  Resend
-                </button>
-              </p>
-            </div>
-          )}
+  <div className="step-2">
+    <div className="otp-instructions">
+      We've sent a 6-digit code to your email at {email}
+    </div>
+    
+    <div className="otp-input-group">
+      {[...Array(6)].map((_, i) => (
+        <input
+          key={i}
+          type="text"
+          maxLength="1"
+          value={otp[i] || ''}
+          onChange={(e) => {
+            const newOtp = otp.split('');
+            newOtp[i] = e.target.value;
+            setOtp(newOtp.join(''));
+            
+            // Auto focus next input
+            if (e.target.value && i < 5) {
+              e.target.nextSibling?.focus();
+            }
+          }}
+          onKeyDown={(e) => {
+            // Handle backspace to move to previous input
+            if (e.key === 'Backspace' && !otp[i] && i > 0) {
+              e.target.previousSibling?.focus();
+            }
+          }}
+          className={otp[i] ? 'filled' : ''}
+        />
+      ))}
+    </div>
+    
+    <p className="otp-timer">
+      Code expires in 5:00
+    </p>
+    
+    <p className="otp-resend">
+      Didn't receive code? <button 
+        type="button" 
+        onClick={handleSendOTP}
+        className="resend-link"
+      >
+        Resend OTP
+      </button>
+    </p>
+  </div>
+)}
 
           {step === 3 && (
             <>
