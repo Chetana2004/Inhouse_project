@@ -1,16 +1,45 @@
-import React from "react";
+// Code is working !!
+
+import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import axios from "axios";
 import "./OrderDetails.css";
 
-const OrderDetails = ({ orders }) => {
+const OrderDetails = () => {
   const { orderNumber } = useParams();
   const navigate = useNavigate();
+  const [order, setOrder] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  const order = orders.find((o) => o.orderNumber === orderNumber);
+  useEffect(() => {
+    const fetchOrder = async () => {
+      try {
+        const response = await axios.get(
+          `https://inhouse-project-3.onrender.com/order/get/${encodeURIComponent(
+            orderNumber
+          )}`
+        );
+        console.log("API Response:", response.data); // Debug log
 
-  if (!order) {
-    return <div className="order-details">Order not found.</div>;
-  }
+        if (response.data && response.data.orderNumber) {
+          setOrder(response.data);
+        } else {
+          console.error("Order data is empty or invalid");
+          setOrder(null);
+        }
+      } catch (err) {
+        console.error("API Error:", err.response?.data || err.message);
+        setOrder(null);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchOrder();
+  }, [orderNumber]);
+
+  if (loading) return <div className="order-details">Loading order...</div>;
+  if (!order) return <div className="order-details">Order not found.</div>;
 
   return (
     <div className="order-details">
@@ -25,9 +54,6 @@ const OrderDetails = ({ orders }) => {
         <strong>Salesperson:</strong> {order.salesperson}
       </p>
       <p>
-        <strong>Payment Terms:</strong> {order.paymentTerms}
-      </p>
-      <p>
         <strong>Status:</strong> {order.status}
       </p>
       <p>
@@ -38,7 +64,6 @@ const OrderDetails = ({ orders }) => {
       <table className="products-table">
         <thead>
           <tr>
-            <th>Product ID</th>
             <th>Description</th>
             <th>Quantity</th>
             <th>Unit Price</th>
@@ -48,7 +73,6 @@ const OrderDetails = ({ orders }) => {
         <tbody>
           {order.products.map((product, index) => (
             <tr key={index}>
-              <td>{product.id}</td>
               <td>{product.name}</td>
               <td>{product.quantity}</td>
               <td>₹{product.unitPrice.toFixed(2)}</td>
@@ -63,17 +87,14 @@ const OrderDetails = ({ orders }) => {
           <strong>Subtotal:</strong> ₹{order.subtotal.toFixed(2)}
         </p>
         <p>
-          <strong>Discount:</strong> - ₹{order.discount.toFixed(2)}
+          <strong>Tax:</strong> ₹{order.tax.toFixed(2)}
         </p>
         <p>
-          <strong>Tax:</strong> + ₹{order.tax.toFixed(2)}
-        </p>
-        <p className="grand-total">
           <strong>Total:</strong> ₹{order.total.toFixed(2)}
         </p>
       </div>
 
-      <button onClick={() => navigate("/orders")} className="back-btn">
+      <button className="back-btn" onClick={() => navigate("/orders")}>
         ← Back to Orders
       </button>
     </div>
