@@ -93,3 +93,57 @@ app.use("/invoice", invoiceRoutes);
 // Server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
+
+
+
+
+//After correction of sales module
+require("dotenv").config();
+const express = require("express");
+const cors = require("cors");
+const morgan = require("morgan");
+const cookieParser = require("cookie-parser");
+const mongoose = require("mongoose");
+
+const AuthRoutes = require("./routes/authRoutes");
+const orderRoutes = require("./routes/SalesDepartment/order.routes");
+const quotationRoutes = require("./routes/SalesDepartment/quotation.routes");
+const invoiceRoutes = require("./routes/SalesDepartment/invoice.routes");
+// const customerRoutes = require("./routes/customer.routes");
+// const paymentRoutes = require("./routes/payment.routes");
+// const invoiceRoutes = require("./routes/invoice.routes");
+
+const app = express();
+
+// MongoDB Connection
+mongoose
+  .connect(process.env.MONGO_URI || "mongodb://127.0.0.1:27017/erp_db", {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => console.log("✅ MongoDB connected"))
+  .catch((err) => console.error("❌ MongoDB connection error:", err));
+
+// Middleware
+app.use(cors({}));
+app.use(express.json());
+app.use(morgan("dev"));
+app.use(cookieParser());
+
+// Test route
+app.get("/", (req, res) => {
+    res.send("Hello World");
+});
+
+// Routes
+app.use("/auth", AuthRoutes);
+app.use("/order", orderRoutes);
+app.use("/quotation", quotationRoutes);
+app.use("/invoice", invoiceRoutes);
+// app.use("/customers", customerRoutes);
+// app.use("/payments", paymentRoutes);
+// app.use("/invoices", invoiceRoutes);
+
+// Server
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
