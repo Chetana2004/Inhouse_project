@@ -35,6 +35,7 @@ const express = require("express");
 const router = express.Router();
 const userController = require("../controllers/auth.controller");
 const jwt = require("jsonwebtoken");
+const authMiddleware = require("../middlewares/authMiddleware");
 
 // Authentication middleware
 const authenticate = (req, res, next) => {
@@ -61,5 +62,8 @@ router.get("/logout", userController.logoutUser);
 router.post("/send-password-otp", userController.sendPasswordOtp);
 router.post("/verify-password-otp", userController.verifyPasswordOtp);
 router.post("/update-password-with-otp", userController.updatePasswordWithOtp);
+
+// Get current user data (protected route)
+router.get("/me",authMiddleware.roleMiddleware, userController.getCurrentUser);
 
 module.exports = router;
