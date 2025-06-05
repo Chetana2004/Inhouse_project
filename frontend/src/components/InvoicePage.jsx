@@ -316,7 +316,7 @@ const InvoicePage = () => {
 
     try {
       await axios.post(
-        "http://localhost:5000/invoice/create",
+        "http://localhost:6000/invoice/create",
         invoiceDataToSend
       );
       alert("Invoice saved successfully!");

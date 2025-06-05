@@ -109,6 +109,9 @@ const AuthRoutes = require("./routes/authRoutes");
 const orderRoutes = require("./routes/SalesDepartment/order.routes");
 const quotationRoutes = require("./routes/SalesDepartment/quotation.routes");
 const invoiceRoutes = require("./routes/SalesDepartment/invoice.routes");
+
+const bomRoutes = require('./routes/ProductionDepartment/bomRoutes');
+
 // const customerRoutes = require("./routes/customer.routes");
 // const paymentRoutes = require("./routes/payment.routes");
 // const invoiceRoutes = require("./routes/invoice.routes");
@@ -140,10 +143,11 @@ app.use("/auth", AuthRoutes);
 app.use("/order", orderRoutes);
 app.use("/quotation", quotationRoutes);
 app.use("/invoice", invoiceRoutes);
+app.use("/bom",bomRoutes);
 // app.use("/customers", customerRoutes);
 // app.use("/payments", paymentRoutes);
 // app.use("/invoices", invoiceRoutes);
 
 // Server
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
