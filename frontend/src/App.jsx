@@ -29,10 +29,6 @@ import RoutingCreate from "./components/RoutingCreate";
 import RoutingList from "./components/RoutingList";
 import WorkCenterCreate from "./components/WorkCenterCreate";
 import WorkCenterList from "./components/WorkCenterList";
-import WorkCenterDashboard from "./components/WorkCenterDashboard";
-import WorkCenterMain from "./components/WorkCenterMain";
-import WorkCenterSetup from "./components/WorkCenterSetup";
-import WorkCenterContainer from "./components/WorkCenterContainer";
 import TopNavbar from "./components/TopNavbar";
 import SalesDashboard from "./components/SalesDashboard";
 
@@ -169,8 +165,8 @@ const App = () => {
         <Route path="/routing/list" element={<RoutingList />} />
 
         {/* Work Center Routes */}
-        <Route path="/workcenter/create" element={<WorkCenterContainer />} />
-        <Route path="/workcenter/list" element={<WorkCenterContainer />} />
+        <Route path="/workcenter/create" element={<WorkCenterCreate />} />
+        <Route path="/workcenter/list" element={<WorkCenterList />} />
       </Routes>
     </Router>
   );
