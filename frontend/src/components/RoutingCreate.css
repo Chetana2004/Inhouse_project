@@ -6,25 +6,8 @@
   padding: 2rem;
   border-radius: 8px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-} */
-/* Container */
-/* .dashboard-container {
-  max-width: 1200px;
-  margin: 30px auto;
-  padding: 30px;
-  background-color: #ce2020;
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin-top: 40px;
 } 
-.dashboard-container {
-  padding: 20px;
-  background-color: #16518b;
-  min-height: 100vh;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-} */
-
-/* Header */
 .section-title {
   font-size: 26px;
   font-weight: 600;
@@ -32,7 +15,7 @@
   margin-bottom: 1.5rem;
 }
 
-/* Subsection Title */
+
 .subsection-title {
   font-size: 20px;
   color: #34495e;
@@ -42,7 +25,6 @@
   padding-bottom: 6px;
 }
 
-/* Form Layout */
 .form-grid {
   display: flex;
   flex-wrap: wrap;
@@ -78,7 +60,6 @@
   outline: none;
 }
 
-/* Operations Table */
 .table-container {
   overflow-x: auto;
   border-radius: 8px;
@@ -123,7 +104,6 @@
   background-color: #f9f9f9;
 }
 
-/* Checkbox Cell */
 .checkbox-container {
   display: flex;
   justify-content: center;
@@ -148,7 +128,6 @@
   color: #842029;
 }
 
-/* Buttons */
 .add-btn,
 .delete-btn {
   padding: 8px 14px;
