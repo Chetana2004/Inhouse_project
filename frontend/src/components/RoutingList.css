@@ -1,148 +1,157 @@
-/* Main Container */
-.routings-list-container {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 30px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* Header Section */
-  .routings-list-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 30px;
-    padding-bottom: 15px;
-    border-bottom: 1px solid #e0e0e0;
-  }
-  
-  .routings-list-header h1 {
-    color: #2c3e50;
-    font-size: 28px;
-    font-weight: 600;
-    margin: 0;
-  }
-  
-  .new-routing-btn {
-    background-color: #3498db;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    font-size: 16px;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  }
-  
-  .new-routing-btn:hover {
-    background-color: #2980b9;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-  }
-  
-  /* Table Styling */
-  .routings-list-table-container {
-    overflow-x: auto;
-    margin-bottom: 30px;
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
-  }
-  
-  .routings-list-table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-  
-  .routings-list-table th {
-    background-color: #f2f6fa;
-    color: #34495e;
-    font-weight: 600;
-    padding: 15px;
-    text-align: left;
-    border-bottom: 2px solid #e0e0e0;
-  }
-  
-  .routings-list-table td {
-    padding: 15px;
-    border-bottom: 1px solid #e0e0e0;
-    color: #4a4a4a;
-  }
-  
-  .routings-list-table tr:hover {
-    background-color: #f5f9ff;
-  }
-  
-  .routings-list-table tr:last-child td {
-    border-bottom: none;
-  }
-  
-  /* Status Badge */
-  .status-badge {
-    display: inline-block;
-    padding: 5px 10px;
-    border-radius: 12px;
-    font-size: 12px;
-    font-weight: 600;
-    text-transform: uppercase;
-  }
-  
-  .status-active {
-    background-color: #e0f7fa;
-    color: #00838f;
-  }
-  
-  .status-draft {
-    background-color: #fff3e0;
-    color: #e65100;
-  }
-  
-  /* Routing ID */
-  .routing-id {
-    color: #3498db;
-    font-weight: 600;
-  }
-  
-  /* Action Button */
-  .action-btn {
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-size: 18px;
-    color: #7f8c8d;
-    transition: all 0.2s ease;
-  }
-  
-  .action-btn:hover {
-    color: #3498db;
-    transform: scale(1.2);
-  }
-  
-  /* Divider */
-  .divider {
-    height: 1px;
-    background-color: #e0e0e0;
-    margin: 30px 0;
-  }
-  
-  /* New Routing Section */
-  .new-routing-section {
-    text-align: center;
-    padding: 20px;
-  }
-  
-  .new-routing-section h2 {
-    color: #2c3e50;
-    font-size: 22px;
-    margin-bottom: 10px;
-  }
-  
-  .new-routing-section .subtext {
-    color: #7f8c8d;
-    font-size: 14px;
-    margin: 0;
-  }
+.routing-list-container {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 30px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.section-title {
+  font-size: 28px;
+  color: #2c3e50;
+  margin-bottom: 25px;
+  font-weight: 600;
+}
+
+.routing-table {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.routing-table thead {
+  background-color: #f8f9fa;
+}
+
+.routing-table th,
+.routing-table td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+  font-size: 14px;
+}
+
+.routing-table th {
+  font-weight: 600;
+  color: #2c3e50;
+}
+
+.routing-table td ul {
+  margin: 0;
+  padding-left: 20px;
+  list-style-type: disc;
+}
+
+.routing-table td ul li {
+  margin-bottom: 6px;
+  color: #34495e;
+}
+
+.action-btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-right: 8px;
+}
+
+.action-btn.edit {
+  background-color: #007bff;
+  color: white;
+}
+
+.action-btn.edit:hover {
+  background-color: #0069d9;
+}
+
+.action-btn.delete {
+  background-color: #dc3545;
+  color: white;
+}
+
+.action-btn.delete:hover {
+  background-color: #c82333;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal {
+  background-color: white;
+  padding: 25px;
+  border-radius: 8px;
+  width: 700px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.modal h3 {
+  font-size: 22px;
+  color: #2c3e50;
+  margin-bottom: 20px;
+}
+
+.modal label {
+  display: block;
+  margin: 15px 0 8px;
+  font-weight: 500;
+  color: #555;
+  font-size: 14px;
+}
+
+.modal input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.operation-edit-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 15px;
+  margin-bottom: 15px;
+  align-items: center;
+}
+
+.modal-actions {
+  margin-top: 25px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 15px;
+}
+
+.action-btn.save {
+  background-color: #28a745;
+  color: white;
+}
+
+.action-btn.save:hover {
+  background-color: #218838;
+}
+
+.action-btn.cancel {
+  background-color: #6c757d;
+  color: white;
+}
+
+.action-btn.cancel:hover {
+  background-color: #5a6268;
+}
