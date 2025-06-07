@@ -1,107 +1,231 @@
-// import React from 'react'
-// import TopNavbar from './TopNavbar'
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import TopNavbar from "./TopNavbar";
+import "./RoutingList.css";
 
-// const RoutingList = () => {
-//   return (
-//     <div>
-//       <TopNavbar />
-//       List of all Routings
-//     </div>
-//   )
-// }
+const RoutingList = () => {
+  const [routings, setRoutings] = useState([]);
+  const [editRouting, setEditRouting] = useState(null);
 
-// export default RoutingList
+  useEffect(() => {
+    fetchRoutings();
+  }, []);
 
+  const fetchRoutings = () => {
+    axios
+      .get("http://localhost:5000/routing")
+      .then((res) => setRoutings(res.data))
+      .catch(() => alert("Failed to fetch routings"));
+  };
 
+  const handleDelete = async (id) => {
+    const confirm = window.confirm(
+      "Are you sure you want to delete this routing?"
+    );
+    if (!confirm) return;
 
-import React from 'react';
-import './RoutingList.css';
-import TopNavbar from './TopNavbar';
-
-const RoutingsList = () => {
-  const routingsData = [
-    {
-      id: 'RT-1001',
-      name: 'Conveyor Assembly',
-      product: 'Conveyor System',
-      status: 'Active',
-      operations: '5 steps',
-      createdDate: '4/20/2025',
-      actions: '💬️'
-    },
-    {
-      id: 'RT-1002',
-      name: 'Frame Welding',
-      product: 'Steel Frame',
-      status: 'Draft',
-      operations: '3 steps',
-      createdDate: '4/18/2025',
-      actions: '💬️'
-    },
-    {
-      id: 'RT-1003',
-      name: 'PCB Assembly',
-      product: 'Control Board',
-      status: 'Active',
-      operations: '8 steps',
-      createdDate: '4/15/2025',
-      actions: '💬️'
+    try {
+      await axios.delete(`http://localhost:5000/routing/${id}`);
+      alert("Routing deleted.");
+      fetchRoutings();
+    } catch (err) {
+      alert("Failed to delete routing.");
     }
-  ];
+  };
+
+  const handleEditInit = (routing) => {
+    // Clone routing to edit
+    setEditRouting(JSON.parse(JSON.stringify(routing)));
+  };
+
+  const handleEditChange = (e) => {
+    const { name, value } = e.target;
+    setEditRouting({ ...editRouting, [name]: value });
+  };
+
+  const handleOperationChange = (index, field, value) => {
+    const updatedOps = [...editRouting.operations];
+    updatedOps[index][field] = value;
+    setEditRouting({ ...editRouting, operations: updatedOps });
+  };
+
+  const handleEditSubmit = async () => {
+    try {
+      await axios.put(
+        `http://localhost:5000/routing/${editRouting._id}`,
+        editRouting
+      );
+      alert("Routing updated successfully.");
+      setEditRouting(null);
+      fetchRoutings();
+    } catch (err) {
+      alert("Failed to update routing.");
+      console.error(err);
+    }
+  };
+  const handleAddOperationBelow = (index) => {
+    const newOp = {
+      name: "",
+      workCenter: "",
+      duration: "",
+      sequence: "",
+    };
+    const updatedOps = [...editRouting.operations];
+    updatedOps.splice(index + 1, 0, newOp);
+    setEditRouting({ ...editRouting, operations: updatedOps });
+  };
+
+  const handleDeleteOperation = (index) => {
+    const updatedOps = [...editRouting.operations];
+    updatedOps.splice(index, 1);
+    setEditRouting({ ...editRouting, operations: updatedOps });
+  };
 
   return (
     <>
-    <TopNavbar />
-    <div className="routings-list-container">
-      <header className="routings-list-header">
-        <h1>Routing Definitions</h1>
-        <button className="new-routing-btn">New Routing</button>
-      </header>
+      <TopNavbar />
+      <div className="routing-list-container">
+        <h2 className="section-title">Routing List</h2>
 
-      <div className="routings-list-table-container">
-        <table className="routings-list-table">
-          <thead>
-            <tr>
-              <th>Routing ID</th>
-              <th>Name</th>
-              <th>Product</th>
-              <th>Status</th>
-              <th>Operations</th>
-              <th>Created Date</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {routingsData.map((routing, index) => (
-              <tr key={index}>
-                <td className="routing-id">{routing.id}</td>
-                <td>{routing.name}</td>
-                <td>{routing.product}</td>
-                <td>
-                  <span className={`status-badge status-${routing.status.toLowerCase()}`}>
-                    {routing.status}
-                  </span>
-                </td>
-                <td>{routing.operations}</td>
-                <td>{routing.createdDate}</td>
-                <td>
-                  <button className="action-btn">{routing.actions}</button>
-                </td>
+        {routings.length === 0 ? (
+          <p>No routing records found.</p>
+        ) : (
+          <table className="routing-table">
+            <thead>
+              <tr>
+                <th>Routing Name</th>
+                <th>Code</th>
+                <th>Associated Product</th>
+                <th>Operations</th>
+                <th>Actions</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+            </thead>
+            <tbody>
+              {routings.map((route) => (
+                <tr key={route._id}>
+                  <td>{route.routingName}</td>
+                  <td>{route.code}</td>
+                  <td>{route.associatedProduct}</td>
+                  <td>
+                    <ul>
+                      {route.operations.map((op, i) => (
+                        <li key={i}>
+                          {op.sequence}. {op.name} — {op.workCenter},{" "}
+                          {op.duration} min
+                        </li>
+                      ))}
+                    </ul>
+                  </td>
+                  <td>
+                    <button
+                      className="action-btn edit"
+                      onClick={() => handleEditInit(route)}
+                    >
+                      Edit
+                    </button>
+                    <button
+                      className="action-btn delete"
+                      onClick={() => handleDelete(route._id)}
+                    >
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        )}
 
-      <div className="divider"></div>
+        {/* Modal Editor */}
+        {editRouting && (
+          <div className="modal-overlay">
+            <div className="modal modal-wide">
+              <h3>Edit Routing</h3>
 
-      <div className="new-routing-section">
-        <h2>New Routing</h2>
-        <p className="subtext">Click the button above to create a new Routing Definition</p>
+              <label>Routing Name</label>
+              <input
+                name="routingName"
+                value={editRouting.routingName}
+                onChange={handleEditChange}
+              />
+
+              <label>Code</label>
+              <input
+                name="code"
+                value={editRouting.code}
+                onChange={handleEditChange}
+              />
+
+              <label>Associated Product</label>
+              <input
+                name="associatedProduct"
+                value={editRouting.associatedProduct}
+                onChange={handleEditChange}
+              />
+
+              <h4>Operations</h4>
+              {editRouting.operations.map((op, i) => (
+                <div key={i} className="operation-edit-row">
+                  <input
+                    placeholder="Name"
+                    value={op.name}
+                    onChange={(e) =>
+                      handleOperationChange(i, "name", e.target.value)
+                    }
+                  />
+                  <input
+                    placeholder="Work Center"
+                    value={op.workCenter}
+                    onChange={(e) =>
+                      handleOperationChange(i, "workCenter", e.target.value)
+                    }
+                  />
+                  <input
+                    placeholder="Duration"
+                    value={op.duration}
+                    onChange={(e) =>
+                      handleOperationChange(i, "duration", e.target.value)
+                    }
+                  />
+                  <input
+                    placeholder="Sequence"
+                    value={op.sequence}
+                    onChange={(e) =>
+                      handleOperationChange(i, "sequence", e.target.value)
+                    }
+                  />
+                  <button
+                    className="action-btn save"
+                    onClick={() => handleAddOperationBelow(i)}
+                  >
+                    Add
+                  </button>
+                  <button
+                    className="action-btn delete"
+                    onClick={() => handleDeleteOperation(i)}
+                  >
+                    Delete
+                  </button>
+                </div>
+              ))}
+
+              <div className="modal-actions">
+                <button className="action-btn save" onClick={handleEditSubmit}>
+                  Save
+                </button>
+                <button
+                  className="action-btn cancel"
+                  onClick={() => setEditRouting(null)}
+                >
+                  Cancel
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
-    </div>
     </>
   );
 };
 
-export default RoutingsList;
+export default RoutingList;
