@@ -4,16 +4,17 @@ const router = express.Router();
 const {
   createWorkCenter,
   getAllWorkCenters,
-  getWorkCenterById
+  getWorkCenterById,
+  deleteWorkCenter
 } = require('../../controllers/ProductionDepartment/workcenterController');
 
-// POST /api/workcenters
+// POST /workcenter
 router.post('/create', createWorkCenter);
 
-// GET /api/workcenters
+// GET /workcenter
 router.get('/list', getAllWorkCenters);
 
-// GET /api/workcenters/:id
-router.get('/:id', getWorkCenterById);
+// DELETE /workcenter/:id
+router.delete('/:id', deleteWorkCenter);
 
 module.exports = router;

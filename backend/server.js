@@ -169,6 +169,8 @@ const invoiceRoutes = require("./routes/SalesDepartment/invoice.routes");
 const routingRoutes = require("./routes/ProductionDepartment/routingRoutes");
 const bomRoutes = require('./routes/ProductionDepartment/bomRoutes');
 const workcenterRoutes = require('./routes/ProductionDepartment/workcenterRoutes');
+const manufacturingRoutes = require('./routes/ProductionDepartment/manufacturingRoutes');
+
 // const customerRoutes = require("./routes/customer.routes");
 // const paymentRoutes = require("./routes/payment.routes");
 // const invoiceRoutes = require("./routes/invoice.routes");
@@ -203,6 +205,7 @@ app.use("/invoice", invoiceRoutes);
 app.use("/bom",bomRoutes);
 app.use("/workcenter",workcenterRoutes);
 app.use("/routing", routingRoutes);
+app.use('./manufacturing-order',manufacturingRoutes);
 // app.use("/routing", require("./routes/ProductionDepartment/routingRoutes"));
 
 // app.use("/customers", customerRoutes);
@@ -210,5 +213,5 @@ app.use("/routing", routingRoutes);
 // app.use("/invoices", invoiceRoutes);
 
 // Server
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));

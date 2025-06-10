@@ -6,7 +6,7 @@ const operationSchema = new mongoose.Schema({
   duration: { type: String, required: true }, // in minutes, as string (e.g. "30")
   sequence: { type: String, required: true },
   allowOverlap: { type: Boolean, default: false },
-  blockingTime: { type: String, required: true },
+  blockingTime: { type: String },
   cost: { type: String, required: true }
 });
 

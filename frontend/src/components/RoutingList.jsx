@@ -13,7 +13,7 @@ const RoutingList = () => {
 
   const fetchRoutings = () => {
     axios
-      .get("http://localhost:5000/routing")
+      .get("http://localhost:8000/routing/list")
       .then((res) => setRoutings(res.data))
       .catch(() => alert("Failed to fetch routings"));
   };
@@ -25,7 +25,7 @@ const RoutingList = () => {
     if (!confirm) return;
 
     try {
-      await axios.delete(`http://localhost:5000/routing/${id}`);
+      await axios.delete(`http://localhost:8000/routing/delete/${id}`);
       alert("Routing deleted.");
       fetchRoutings();
     } catch (err) {
@@ -52,7 +52,7 @@ const RoutingList = () => {
   const handleEditSubmit = async () => {
     try {
       await axios.put(
-        `http://localhost:5000/routing/${editRouting._id}`,
+        `http://localhost:8000/routing/update/${editRouting._id}`,
         editRouting
       );
       alert("Routing updated successfully.");

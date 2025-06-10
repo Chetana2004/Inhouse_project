@@ -226,10 +226,10 @@ const TopNavbar = () => {
       icon: <FiPackage />,
       key: 'manufacturing',
       dropdown: [
-        { name: 'Create Manufacturing Order', path: '/manufacturing/create', icon: <FiPlusCircle /> },
-        { name: 'View All Orders', path: '/manufacturing/list', icon: <FiList /> },
-        { name: 'Unbuild Order', path: '/manufacturing/unbuild', icon: <FiTool /> },
-        { name: 'Scrap Order', path: '/manufacturing/scrap', icon: <FiTruck /> }
+        { name: 'Create Manufacturing Order', path: '/manufacturing-order/create', icon: <FiPlusCircle /> },
+        { name: 'View All Orders', path: '/manufacturing-order/list', icon: <FiList /> },
+        { name: 'Unbuild Order', path: '/manufacturing-order/unbuild', icon: <FiTool /> },
+        { name: 'Scrap Order', path: '/manufacturing-order/scrap', icon: <FiTruck /> }
       ]
     },
     {

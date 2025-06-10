@@ -63,9 +63,8 @@ const RoutingCreate = () => {
         associatedProduct,
         operations,
       };
-      await axios.post("http://localhost:5000/routing", payload);
+      await axios.post("http://localhost:8000/routing/create", payload);
       alert("Routing saved successfully!");
-      navigate("/routing/list");
     } catch (err) {
       alert("Failed to save routing.");
       console.error(err);
@@ -78,7 +77,7 @@ const RoutingCreate = () => {
       <div className="dashboard-container">
         <main className="dashboard-content">
           <section className="routing-section">
-            <h2 className="section-title">New Routing</h2>
+            <h2 className="section-title">Create New Routing</h2>
 
             {/* Basic Info Section */}
             <div className="basic-info-section">
@@ -237,9 +236,12 @@ const RoutingCreate = () => {
                   </table>
                 </div>
               </div>
-              <button className="add-btn" onClick={handleSubmitRouting}>
-                Save Routing
-              </button>
+              <div className="button-container">
+                <button className="add-btn" onClick={handleSubmitRouting}>
+                      Save Routing
+                </button>
+              </div>
+
             </div>
           </section>
         </main>

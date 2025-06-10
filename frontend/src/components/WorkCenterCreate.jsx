@@ -63,13 +63,10 @@ const WorkCenterCreate = () => {
       <TopNavbar />
 
       <div className="work-center-create-container">
-        <div className="header-section">
-          <h1>Create New Work Center</h1>
-          <p className="subtitle">Define production resources for conveyor manufacturing</p>
-        </div>
 
         <form onSubmit={handleSubmit} className="work-center-form">
           <div className="form-grid">
+            <h1>Create New Work Center</h1>
             {/* -- Form Inputs (Same as before) -- */}
             {['code', 'name', 'location', 'supervisor', 'capacity', 'efficiency', 'costRate'].map(field => (
               <div className="form-group" key={field}>

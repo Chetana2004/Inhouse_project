@@ -34,8 +34,20 @@ const getWorkCenterById = async (req, res) => {
   }
 };
 
+// Delete a work center by id
+const deleteWorkCenter = async (req, res) => {
+  try {
+    const center = await WorkCenter.findByIdAndDelete(req.params.id);
+    if (!center) return res.status(404).json({ message: 'Not found' });
+    res.json({ message: 'Work center deleted successfully' });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 module.exports = {
   createWorkCenter,
   getAllWorkCenters,
-  getWorkCenterById
+  getWorkCenterById,
+  deleteWorkCenter
 };

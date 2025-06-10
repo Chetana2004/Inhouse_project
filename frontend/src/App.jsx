@@ -321,19 +321,19 @@ const App = () => {
 
         {/* Manufacturing Order Routes */}
         <Route
-          path="/manufacturing/create"
+          path="/manufacturing-order/create"
           element={<ManufacturingOrderCreate />}
         />
         <Route
-          path="/manufacturing/list"
+          path="/manufacturing-order/list"
           element={<ManufacturingOrderList />}
         />
         <Route
-          path="/manufacturing/unbuild"
+          path="/manufacturing-order/unbuild"
           element={<ManufacturingOrderUnbuild />}
         />
         <Route
-          path="/manufacturing/scrap"
+          path="/manufacturing-order/scrap"
           element={<ManufacturingOrderScrap />}
         />
 

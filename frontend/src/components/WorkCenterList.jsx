@@ -29,7 +29,7 @@ const WorkCenterList = () => {
   const handleDelete = async (id) => {
     if (window.confirm('Are you sure you want to delete this work center?')) {
       try {
-        await axios.delete(`/api/workcenters/${id}`);
+        await axios.delete(`http://localhost:8000/workcenter/${id}`);
         setWorkCenters(workCenters.filter(wc => wc.id !== id));
       } catch (err) {
         setError(err.message);
@@ -52,21 +52,12 @@ const WorkCenterList = () => {
     <div className="work-center-list-container">
       <div className="header-section">
         <h1>Work Centers</h1>
-        <p className="subtitle">Manage your conveyor manufacturing resources</p>
-        <div className="action-bar">
-          <div className="search-box">
-            <input
-              type="text"
-              placeholder="Search work centers..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-            />
-            <span className="search-icon">🔍</span>
-          </div>
-          <Link to="/workcenters/new" className="primary-button">
-            + New Work Center
-          </Link>
-        </div>
+          <div style={{ textAlign: 'right' }}>
+  <Link to="/workcenter/create" className="primary-button">
+    + New Work Center
+  </Link>
+</div>
+
       </div>
 
       <div className="work-center-table-container">

@@ -555,7 +555,7 @@ const BomCreate = () => {
         {/* Submit BOM button */}
         <div className="submit-bom-section">
           <button className="submit-bom-btn" onClick={handleSubmit}>
-            ✅ Create BOM
+            Create BOM
           </button>
         </div>
       </div>
