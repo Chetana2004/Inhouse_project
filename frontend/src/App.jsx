@@ -206,6 +206,7 @@ import ManufacturingOrderCreate from "./components/ManufacturingOrderCreate";
 import ManufacturingOrderList from "./components/ManufacturingOrderList";
 import BomCreate from "./components/BomCreate";
 import BomList from "./components/BomList";
+import ScrapOrderList from "./components/ScrapOrderList";
 import RoutingCreate from "./components/RoutingCreate";
 import RoutingList from "./components/RoutingList";
 import WorkCenterCreate from "./components/WorkCenterCreate";
@@ -294,6 +295,14 @@ const App = () => {
             </Layout>
           }
         />
+<Route
+  path="/scrap-orders"
+  element={
+    <Layout>
+      <ScrapOrderList />
+    </Layout>
+  }
+/>
 
         <Route
           path="/generate-quotation"
