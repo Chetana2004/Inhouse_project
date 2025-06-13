@@ -1,4 +1,4 @@
-// controllers/workcenterController.js
+
 const WorkCenter = require('../../models/ProductionDepartment/workcenterModel');
 
 // Create new work center
@@ -34,6 +34,21 @@ const getWorkCenterById = async (req, res) => {
   }
 };
 
+// Update a work center by id
+const updateWorkCenter = async (req, res) => {
+  try {
+    const updatedCenter = await WorkCenter.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      { new: true, runValidators: true }
+    );
+    if (!updatedCenter) return res.status(404).json({ message: 'Not found' });
+    res.json(updatedCenter);
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+};
+
 // Delete a work center by id
 const deleteWorkCenter = async (req, res) => {
   try {
@@ -49,5 +64,6 @@ module.exports = {
   createWorkCenter,
   getAllWorkCenters,
   getWorkCenterById,
+  updateWorkCenter,
   deleteWorkCenter
 };

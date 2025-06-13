@@ -5,7 +5,8 @@ const {
   createWorkCenter,
   getAllWorkCenters,
   getWorkCenterById,
-  deleteWorkCenter
+  deleteWorkCenter,
+  updateWorkCenter
 } = require('../../controllers/ProductionDepartment/workcenterController');
 
 // POST /workcenter
@@ -15,6 +16,9 @@ router.post('/create', createWorkCenter);
 router.get('/list', getAllWorkCenters);
 
 // DELETE /workcenter/:id
-router.delete('/:id', deleteWorkCenter);
+router.delete('/delete/:id', deleteWorkCenter);
+
+// UPDATE /workcenter/:id
+router.put('/update/:id', updateWorkCenter);
 
 module.exports = router;
